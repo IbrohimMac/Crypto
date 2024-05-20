@@ -78,7 +78,7 @@ body {
   justify-content: center;
 }
 .home-big2 .search input {
-  width: 1232px;
+  width: 1300px;
   height: 61px;
   border-radius: 8px;
   background-color: #14161a;
@@ -90,6 +90,7 @@ body {
 }
 .home-big2 .table {
   margin-top: 20px;
+  border-radius: 8px;
 }
 .home-big2 .table .tabImg-vme {
   padding-top: 9px;

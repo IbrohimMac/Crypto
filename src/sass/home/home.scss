@@ -81,7 +81,7 @@ body {
     display: flex;
     justify-content: center;
     input {
-      width: 1232px;
+      width: 1300px;
       height: 61px;
       border-radius: 8px;
       background-color: #14161a;
@@ -94,6 +94,7 @@ body {
   }
   .table {
     margin-top: 20px;
+    border-radius: 8px;
     .tabImg-vme {
       padding-top: 9px;
       display: flex;
