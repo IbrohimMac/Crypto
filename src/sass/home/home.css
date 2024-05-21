@@ -81,7 +81,6 @@ body {
 }
 .home-big2 .table {
   margin-top: 20px;
-  border-radius: 8px;
 }
 .home-big2 .table .tabImg-vme {
   padding-top: 9px;
@@ -118,5 +117,5 @@ body {
 }
 
 p {
-  color: white;
+  color: rgb(255, 255, 255);
 }/*# sourceMappingURL=home.css.map */

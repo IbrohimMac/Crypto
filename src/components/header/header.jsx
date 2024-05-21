@@ -2,14 +2,16 @@ import React, { useState } from "react";
 import "../../sass/header/header.css";
 import { Link } from "react-router-dom";
 import { ImExit } from "react-icons/im";
+
 const header = () => {
-  ////// Sidebar /////////
+  //   ////// Sidebar /////////
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
-  //////
+  //   //////
+
   return (
     <header>
       <div className="container">
