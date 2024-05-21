@@ -1,15 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Component } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import "../../sass/details/Details.css";
 
-import { useGlobalContext } from "../../components/sidebar/context";
-import { FaBars } from "react-icons/fa";
 const Details = () => {
-  //////  Sidebar //////////////////////////////////
-
-  const { openSidebar } = useGlobalContext();
-
-  ////////////////////////////////////////////////////////////////
   const { id } = useParams();
   const navigate = useNavigate();
   const [crypto, setCrypto] = useState([]);
@@ -26,18 +20,26 @@ const Details = () => {
     };
     fetchData();
   }, []);
+  console.log(crypto);
+
   return (
-    <div>
-      <div>
-        {/* Sidebar */}
-
-        {/* <button className="sidebar-toggle" onClick={openSidebar}>
-          <FaBars />
-        </button> */}
-
-        {/* Sidebar */}
-        <img src={crypto.image} alt="ll" />
-        <h1>{crypto.name}</h1>
+    <div className="detaAdmin">
+      <div className="detaBig">
+        <div>
+          {/* <div className="p-3"> */}
+          <img
+            style={{ width: 200, height: 200 }}
+            className="caru-i"
+            src={crypto.image}
+            alt={crypto.id}
+          />
+          <h1>{crypto.name}</h1>
+          <h6 className="detaP">{crypto.description?.bg.slice(0, 188)}</h6>
+          <h4>Rank: {crypto.market_cap_rank}</h4>
+          <h4>Current Price: ₹{crypto?.market_data?.current_price.bmd}</h4>
+          <h4>Market Cap: ₹{crypto?.market_data?.market_cap.bmd}</h4>
+          {/* </div> */}
+        </div>
       </div>
     </div>
   );

@@ -33,6 +33,7 @@ header .head-big h1 {
   color: #87ceeb;
 }
 header .head-big .head-end {
+  margin-left: 900px;
   display: flex;
   gap: 30px;
 }
@@ -46,7 +47,6 @@ header .head-big .head-end select {
 header .head-big .head-end button {
   width: 133px;
   height: 40px;
-  left: 15px;
   padding: 8px 17px 8px 19px;
   gap: 0px;
   border-radius: 8px;
@@ -71,4 +71,67 @@ header .head-big .head-end button:hover {
 
 .Link {
   text-decoration: none;
+}
+
+.App {
+  display: flex;
+}
+
+.app {
+  padding-left: 20px;
+  position: fixed;
+  z-index: 1;
+}
+
+.sidebar {
+  margin-left: 200px;
+  right: -510px;
+  position: fixed;
+  z-index: 1100;
+  top: 0;
+  width: 510px;
+  height: 100%;
+  background-color: #333;
+  color: #fff;
+  padding: 15px;
+  box-sizing: border-box;
+  transition: right 0.3s;
+}
+
+.head-exit {
+  background-color: transparent;
+  color: white;
+  border: none;
+  font-size: 30px;
+  margin-left: 20px;
+}
+
+.sidebar.open {
+  right: 0;
+}
+
+.sidebar h2 {
+  text-align: center;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin: 15px 0;
+}
+
+.sidebar ul li a {
+  color: #fff;
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+  border-radius: 4px;
+  transition: background 0.3s;
+}
+
+.sidebar ul li a:hover {
+  background-color: #575757;
 }/*# sourceMappingURL=header.css.map */

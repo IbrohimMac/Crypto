@@ -3,6 +3,8 @@ import Header from "./components/header/header";
 import Home from "./pages/home/Home";
 import Details from "./pages/crypto-details/Details";
 import Sidebar from "./components/sidebar/Sidebar";
+////
+
 const App = () => {
   return (
     <div>

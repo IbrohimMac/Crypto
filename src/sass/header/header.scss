@@ -28,6 +28,7 @@ header {
       color: #87ceeb;
     }
     .head-end {
+      margin-left: 900px;
       display: flex;
       gap: 30px;
       select {
@@ -40,7 +41,6 @@ header {
       button {
         width: 133px;
         height: 40px;
-        left: 15px;
         padding: 8px 17px 8px 19px;
         gap: 0px;
         border-radius: 8px;
@@ -57,6 +57,9 @@ header {
         letter-spacing: 0.4000000059604645px;
         text-align: center;
         cursor: pointer;
+        // position: absolute;
+        // z-index: 1000;
+        // font-size: 16px;
       }
       button:hover {
         background-color: #99d1e7;
@@ -65,6 +68,88 @@ header {
     }
   }
 }
+
 .Link {
   text-decoration: none;
+}
+
+.App {
+  display: flex;
+}
+
+// .toggle-button {
+//   width: 133px;
+//   height: 40px;
+//   left: 15px;
+//   padding: 8px 17px 8px 19px;
+//   gap: 0px;
+//   border-radius: 8px;
+//   opacity: 0px;
+//   box-shadow: 0px 1px 5px 0px #0000001f;
+//   box-shadow: 0px 2px 2px 0px #00000024;
+//   box-shadow: 0px 3px 1px -2px #00000033;
+//   border: none;
+//   background-color: #87ceeb;
+//   color: black;
+//   font-size: 14px;
+//   font-weight: 500;
+//   line-height: 24.5px;
+//   letter-spacing: 0.4000000059604645px;
+//   text-align: center;
+//   cursor: pointer;
+// }
+.app {
+  padding-left: 20px;
+  position: fixed;
+  z-index: 1;
+}
+.sidebar {
+  margin-left: 200px;
+  right: -510px;
+  position: fixed;
+  z-index: 1100;
+  top: 0;
+  width: 510px;
+  height: 100%;
+  background-color: #333;
+  color: #fff;
+  padding: 15px;
+  box-sizing: border-box;
+  transition: right 0.3s;
+}
+.head-exit {
+  background-color: transparent;
+  color: white;
+  border: none;
+  font-size: 30px;
+  margin-left: 20px;
+}
+.sidebar.open {
+  right: 0;
+}
+
+.sidebar h2 {
+  text-align: center;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin: 15px 0;
+}
+
+.sidebar ul li a {
+  color: #fff;
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+  border-radius: 4px;
+  transition: background 0.3s;
+}
+
+.sidebar ul li a:hover {
+  background-color: #575757;
 }

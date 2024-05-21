@@ -1,21 +1,45 @@
 import React, { useState, useEffect } from "react";
 import "../../sass/home/home.css";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Carousel } from "react-responsive-carousel";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
-// import { useGlobalContext } from "../../components/sidebar/context";
-// import { FaBars } from "react-icons/fa";
+
+///// Loading /////
+
+///////
+
+/////// CArousel ////// //
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+///
 const home = () => {
-  //////  Sidebar //////////////////////////////////
-
-  // const { openSidebar, openModal } = useGlobalContext();
-
+  //////  Carousel //////////////////////////////////
+  const responsive = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 5,
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 3,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+    },
+  };
   ////////////////////////////////////////////////////////////////
+
+  ////// API FETCH //////////////////////////////////
   const [crypto, setCrypto] = useState([]);
   useEffect(() => {
     const url =
-      "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=gecko_desc&per_page=10&page=1&sparkline=false&price_change_percentage=24h";
+      "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=gecko_desc&per_page=20&page=1&sparkline=false&price_change_percentage=24h";
     const fetchData = async () => {
       try {
         const response = await fetch(url);
@@ -27,7 +51,7 @@ const home = () => {
     };
     fetchData();
   }, []);
-
+  ///////////////////////
   const backgroundImage = {
     backgroundImage:
       "url(https://s3-alpha-sig.figma.com/img/caf5/016f/97f154adfd88d0e48d9a7fc87e5ab035?Expires=1716768000&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=YKFT1pH7jc~vfigaOM6LA5TsF8Jx2DnThyDOxr~-0kIkaUSdQYERDUs4IW7GOcI87ZgxZbjSpRzmg0ZqEtQngMWq-hjOM~zV3o2L-uCzKO23l6O3U7OTpBZHLr-oy1tZAspVdHceVuToOx10gkKjnHFYygcskVNodkZDGtH2WNCZJ~6b7gwTpYd~nhZ3s7lcyEzcS6EFHxvfFCs6uAXMf0oCwh4XdfBztkjtEu4q-jAFFYyZoIiRc1ByUOWquvfh~KFrBy-dvViTf~dp0ugW~jKdNVqB58SDXaCZekvMqfdwvOGV8MP7ReMABS7XXZGIkfULQESwOtevsH1AnK5Myg__)",
@@ -42,6 +66,10 @@ const home = () => {
 
   ////////////////////////////////////////////////////////////////
 
+  /////////// Loading //////////////////////////////////
+
+  //////////////
+
   return (
     <div>
       <div className="home-big">
@@ -51,7 +79,7 @@ const home = () => {
         </p>
         {crypto.length > 0 && (
           <div>
-            <Carousel className="admin-caru">
+            <Carousel responsive={responsive}>
               {crypto.map((crypto) => (
                 <div>
                   <div className="caru">
@@ -62,7 +90,7 @@ const home = () => {
                       alt=""
                     />
                     <div className="caru-pp">
-                      <p className="caru-p1">{crypto.symbol}</p>
+                      <p className="caru-p1">{crypto.symbol.toUpperCase()}</p>
                       <p className="caru-p2">{crypto.price_change_24h}%</p>
                     </div>
                     <p className="caru-p1">₹ {crypto.current_price}</p>
@@ -117,12 +145,24 @@ const home = () => {
                         )
                         .map((crypto) => (
                           <div className="tabImg-vme ">
-                            <img src={crypto.image} alt="" />
+                            <Link to={`/details/${crypto.id}`}>
+                              <img src={crypto.image} alt="" />
+                            </Link>
                             <div className="tabImgP">
-                              <h4 className="tabImgHH">
-                                {crypto.symbol.toUpperCase()}
-                              </h4>
-                              <p className="tabImgPP">{crypto.name}</p>
+                              <Link
+                                className="link"
+                                to={`/details/${crypto.id}`}
+                              >
+                                <h4 className="tabImgHH">
+                                  {crypto.symbol.toUpperCase()}
+                                </h4>
+                              </Link>
+                              <Link
+                                className="link"
+                                to={`/details/${crypto.id}`}
+                              >
+                                <p className="tabImgPP">{crypto.name}</p>
+                              </Link>
                             </div>
                           </div>
                         ))}
@@ -186,11 +226,9 @@ const home = () => {
                         )
                         .map((crypto) => (
                           <div>
-                            <Link to={`/details/${crypto.id}`}>
-                              <p className="tabPPP">
-                                ₹ {crypto.market_cap_change_24h}
-                              </p>
-                            </Link>
+                            <p className="tabPPP">
+                              ₹ {crypto.market_cap_change_24h}
+                            </p>
                           </div>
                         ))}
                     </div>
@@ -199,21 +237,9 @@ const home = () => {
               </tr>
             </tbody>
           </table>
-
-          {/* Sidebar */}
-
-          {/* <button className="sidebar-toggle" onClick={openSidebar}>
-            <FaBars />
-          </button>
-          <button className="btn" onClick={openModal}>
-            show modal
-          </button> */}
-
-          {/* Sidebar */}
         </div>
       </div>
     </div>
   );
 };
-
 export default home;
