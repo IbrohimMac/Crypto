@@ -9,7 +9,6 @@ const App = () => {
     <div>
       <Router>
         <div>
-          <Header />
           <Routes>
             <Route path="/" element={<Home />} />
             {/* <Route path="/sidebar" element={<Sidebar />} /> */}

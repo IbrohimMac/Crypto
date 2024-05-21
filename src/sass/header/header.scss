@@ -98,10 +98,16 @@ header {
 //   text-align: center;
 //   cursor: pointer;
 // }
-.app {
+.App {
   padding-left: 20px;
   position: fixed;
-  z-index: 1;
+  z-index: 1100;
+  display: flex;
+}
+#app {
+  display: flex;
+  flex-direction: column;
+  // min-height: 100vh;
 }
 .sidebar {
   margin-left: 200px;
@@ -152,4 +158,39 @@ header {
 
 .sidebar ul li a:hover {
   background-color: #575757;
+}
+.head-side {
+  width: 170px;
+  height: 200px;
+  gap: 0px;
+  border-radius: 25px;
+  opacity: 0px;
+  background-color: #14161a;
+  padding-top: 17px;
+  // padding-left: 40px;
+  margin-top: 20px;
+  .side-img {
+    width: 60px;
+    height: 58px;
+    margin-bottom: 30px;
+    margin-left: 50px;
+  }
+  .side-but {
+    width: 60px;
+    height: 30px;
+    background-color: red;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    margin-bottom: 15px;
+    margin-left: 50px;
+  }
+  .side-h {
+    margin-left: 25px;
+    margin-bottom: 15px;
+  }
+  .side-but:hover {
+    background-color: rgb(241, 50, 50);
+    transition: 0.4s;
+  }
 }

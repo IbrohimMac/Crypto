@@ -3,6 +3,7 @@ body {
 }
 body .detaAdmin {
   display: flex;
+  margin-top: 50px;
 }
 body .detaAdmin .detaBig {
   width: 480px;

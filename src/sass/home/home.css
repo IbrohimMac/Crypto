@@ -116,6 +116,15 @@ body {
   margin-top: 24px;
 }
 
+.tabPPPP {
+  font-size: 14px;
+  font-weight: 400;
+  height: 50px;
+  margin-top: 23px;
+  display: flex;
+  gap: 15px;
+}
+
 p {
   color: rgb(255, 255, 255);
 }/*# sourceMappingURL=home.css.map */
