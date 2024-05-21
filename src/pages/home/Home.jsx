@@ -1,4 +1,3 @@
-// ORIGINAL
 import React, { useState, useEffect } from "react";
 import "../../sass/home/home.css";
 import "../../sass/header/header.css";
@@ -9,32 +8,26 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { ImExit } from "react-icons/im";
 import { TbEyePlus } from "react-icons/tb";
+import ReactPaginate from "react-paginate";
+
 const Home = () => {
   const responsive = {
-    superLargeDesktop: {
-      breakpoint: { max: 4000, min: 3000 },
-      items: 5,
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 3,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1,
-    },
+    superLargeDesktop: { breakpoint: { max: 4000, min: 3000 }, items: 5 },
+    desktop: { breakpoint: { max: 3000, min: 1024 }, items: 3 },
+    tablet: { breakpoint: { max: 1024, min: 464 }, items: 2 },
+    mobile: { breakpoint: { max: 464, min: 0 }, items: 1 },
   };
 
   const [crypto, setCrypto] = useState([]);
   const [sidebarItems, setSidebarItems] = useState([]);
-
+  const [currentPage, setCurrentPage] = useState(0);
+  const itemsPerPage = 5;
+  /////// SEARCH //////////////////////////////////
+  const [search, setSearch] = useState("");
+  ////////////////////////////////////////////////////////////////
   useEffect(() => {
     const url =
-      "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=gecko_desc&per_page=10&page=1&sparkline=false&price_change_percentage=24h";
+      "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=gecko_desc&per_page=50&page=1&sparkline=false&price_change_percentage=24h";
     const fetchData = async () => {
       try {
         const response = await fetch(url);
@@ -47,22 +40,29 @@ const Home = () => {
     fetchData();
   }, []);
 
+  const [isOpen, setIsOpen] = useState(false);
   const addToSidebar = (item) => {
     setSidebarItems((prevItems) => [...prevItems, item]);
-    // };
   };
-
-  ///// SEarch //////////////////////////////////////////////////////////////////
-  const [search, setSearch] = useState("");
-  ////////////////////////////////////////////////////////////////
-
-  //////// Header - Sidebar //////////////////////////////////
-  const [isOpen, setIsOpen] = useState(false);
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
-  //   //////
+
+  const handlePageClick = (event) => {
+    setCurrentPage(event.selected);
+  };
+
+  const filteredCrypto = crypto.filter(
+    (crypto) =>
+      crypto.name.toLowerCase().includes(search.toLowerCase()) ||
+      crypto.symbol.toLowerCase().includes(search.toLowerCase())
+  );
+
+  const offset = currentPage * itemsPerPage;
+  const currentPageData = filteredCrypto.slice(offset, offset + itemsPerPage);
+  const pageCount = Math.ceil(filteredCrypto.length / itemsPerPage);
+
   return (
     <div>
       <header>
@@ -102,7 +102,6 @@ const Home = () => {
           </div>
         </div>
       </header>
-      {/* ////////////////////////////////// */}
       <div className="home-big">
         <h1 className="homeBig-h">CRYPTOFOLIO WATCH LIST</h1>
         <p className="homeBig-p">
@@ -160,57 +159,71 @@ const Home = () => {
               </tr>
             </thead>
             <tbody>
-              {crypto.length > 0 &&
-                crypto
-                  .filter(
-                    (crypto) =>
-                      crypto.name
-                        .toLowerCase()
-                        .includes(search.toLowerCase()) ||
-                      crypto.symbol.toLowerCase().includes(search.toLowerCase())
-                  )
-                  .map((crypto, index) => (
-                    <tr key={crypto.id}>
-                      <th>
-                        <div className="tabImg-vme">
-                          <Link to={`/details/${crypto.id}`}>
-                            <img src={crypto.image} alt={crypto.name} />
-                          </Link>
-                          <div className="tabImgP">
-                            <Link className="link" to={`/details/${crypto.id}`}>
-                              <h4 className="tabImgHH">
-                                {crypto.symbol.toUpperCase()}
-                              </h4>
-                            </Link>
-                            <Link className="link" to={`/details/${crypto.id}`}>
-                              <p className="tabImgPP">{crypto.name}</p>
-                            </Link>
-                          </div>
-                        </div>
-                      </th>
-                      <td>
-                        <p className="tabPPP">₹ {crypto.current_price}</p>
-                      </td>
-                      <td>
-                        <p className="tabPPP">{crypto.price_change_24h}%</p>
-                      </td>
-                      <td>
-                        <p className="tabPPPP">
-                          <TbEyePlus
-                            style={{
-                              cursor: "pointer",
-                              width: 26,
-                              height: 24,
-                            }}
-                            onClick={() => addToSidebar(crypto)}
-                          />
-                          {crypto.market_cap_change_24h}
-                        </p>
-                      </td>
-                    </tr>
-                  ))}
+              {currentPageData.map((crypto, index) => (
+                <tr key={crypto.id}>
+                  <th>
+                    <div className="tabImg-vme">
+                      <Link to={`/details/${crypto.id}`}>
+                        <img src={crypto.image} alt={crypto.name} />
+                      </Link>
+                      <div className="tabImgP">
+                        <Link className="link" to={`/details/${crypto.id}`}>
+                          <h4 className="tabImgHH">
+                            {crypto.symbol.toUpperCase()}
+                          </h4>
+                        </Link>
+                        <Link className="link" to={`/details/${crypto.id}`}>
+                          <p className="tabImgPP">{crypto.name}</p>
+                        </Link>
+                      </div>
+                    </div>
+                  </th>
+                  <td>
+                    <Link className="link" to={`/details/${crypto.id}`}>
+                      <p className="tabPPP">₹ {crypto.current_price}</p>
+                    </Link>
+                  </td>
+                  <td>
+                    <Link className="link" to={`/details/${crypto.id}`}>
+                      <p className="tabPPP">{crypto.price_change_24h}%</p>
+                    </Link>
+                  </td>
+                  <td>
+                    <p className="tabPPPP">
+                      <TbEyePlus
+                        style={{ cursor: "pointer", width: 26, height: 24 }}
+                        onClick={() => addToSidebar(crypto)}
+                      />
+                      <Link className="link" to={`/details/${crypto.id}`}>
+                        {crypto.market_cap_change_24h}
+                      </Link>
+                    </p>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
+          <ReactPaginate
+            previousLabel={<button>Previous</button>}
+            nextLabel={<button>Next</button>}
+            breakLabel={<span>...</span>}
+            breakClassName={"break-me"}
+            pageCount={pageCount}
+            marginPagesDisplayed={2}
+            pageRangeDisplayed={5}
+            onPageChange={handlePageClick}
+            containerClassName={"pagination"}
+            subContainerClassName={"pages pagination"}
+            activeClassName={"active"}
+            pageClassName={"page-item"}
+            pageLinkClassName={"page-link"}
+            previousClassName={"page-item"}
+            previousLinkClassName={"page-link"}
+            nextClassName={"page-item"}
+            nextLinkClassName={"page-link"}
+            breakLinkClassName={"page-link"}
+            disabledClassName={"disabled"}
+          />
         </div>
       </div>
     </div>
