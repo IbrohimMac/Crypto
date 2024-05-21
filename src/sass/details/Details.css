@@ -6,7 +6,7 @@ body .detaAdmin {
   margin-top: 50px;
 }
 body .detaAdmin .detaBig {
-  width: 480px;
+  width: 540px;
   height: 787px;
   top: 89px;
   gap: 0px;
@@ -36,5 +36,5 @@ body .detaAdmin .detaBig .caru-i {
 }
 body .detaAdmin .detaBig .detaP {
   color: white;
-  width: 420px;
+  width: 320px;
 }/*# sourceMappingURL=Details.css.map */

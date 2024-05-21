@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "../../sass/details/Details.css";
 import "../../sass/header/header.css";
-import ApexChart from "../../components/apexchart";
+import Apex from "../../components/Apex";
 import axios from "axios";
 import { ImExit } from "react-icons/im";
 const Details = () => {
@@ -109,8 +109,8 @@ const Details = () => {
             {/* </div> */}
           </div>
         </div>
-        <div className="apexChart">
-          <ApexChart dates={chartData} />
+        <div className="apex">
+          <Apex dates={chartData} />
         </div>
       </div>
     </>

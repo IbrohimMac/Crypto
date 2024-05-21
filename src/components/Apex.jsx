@@ -1,8 +1,7 @@
 import React from "react";
-import ReactApexChart from "react-apexcharts";
-// import "./Chart.scss";
+import ReactApex from "react-apexcharts";
 
-class ApexChart extends React.Component {
+class Apex extends React.Component {
   constructor(props) {
     super(props);
 
@@ -10,7 +9,7 @@ class ApexChart extends React.Component {
       series: [
         {
           name: "Price",
-          data: props.dates, // Initialize with props data
+          data: props.dates,
         },
       ],
       options: {
@@ -89,7 +88,7 @@ class ApexChart extends React.Component {
     return (
       <div>
         <div id="chart">
-          <ReactApexChart
+          <ReactApex
             options={this.state.options}
             series={this.state.series}
             type="area"
@@ -102,4 +101,4 @@ class ApexChart extends React.Component {
   }
 }
 
-export default ApexChart;
+export default Apex;
