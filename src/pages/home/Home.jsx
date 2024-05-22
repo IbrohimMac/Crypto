@@ -18,13 +18,8 @@ const Home = () => {
     mobile: { breakpoint: { max: 464, min: 0 }, items: 1 },
   };
 
+  ////////// FETCH //////////////////////////////////
   const [crypto, setCrypto] = useState([]);
-  const [sidebarItems, setSidebarItems] = useState([]);
-  const [currentPage, setCurrentPage] = useState(0);
-  const itemsPerPage = 5;
-  /////// SEARCH //////////////////////////////////
-  const [search, setSearch] = useState("");
-  ////////////////////////////////////////////////////////////////
   useEffect(() => {
     const url =
       "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&order=gecko_desc&per_page=50&page=1&sparkline=false&price_change_percentage=24h";
@@ -39,30 +34,57 @@ const Home = () => {
     };
     fetchData();
   }, []);
-
+  ///////////////////////// SIDEBAR //////////////////////////////////
   const [isOpen, setIsOpen] = useState(false);
+  const [sidebarItems, setSidebarItems] = useState(
+    JSON.parse(localStorage.getItem("sidebarItems")) || []
+  );
+
+  useEffect(() => {
+    localStorage.setItem("sidebarItems", JSON.stringify(sidebarItems));
+  }, [sidebarItems]);
+
   const addToSidebar = (item) => {
-    setSidebarItems((prevItems) => [...prevItems, item]);
+    if (!sidebarItems.some((sidebarItem) => sidebarItem.id === item.id)) {
+      setSidebarItems((prevItems) => [...prevItems, item]);
+    }
   };
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
+  //////////////////////////////////////////
 
-  const handlePageClick = (event) => {
-    setCurrentPage(event.selected);
-  };
-
+  ///////////////// SEARCH //////////////////////////////////
+  const [search, setSearch] = useState("");
   const filteredCrypto = crypto.filter(
     (crypto) =>
       crypto.name.toLowerCase().includes(search.toLowerCase()) ||
       crypto.symbol.toLowerCase().includes(search.toLowerCase())
   );
 
-  const offset = currentPage * itemsPerPage;
+  /////////////////////////// PAGINATION //////////////////////////////////
+
+  const [Pagination, setPagination] = useState(0);
+  const itemsPerPage = 5;
+  const handlePageClick = (event) => {
+    setPagination(event.selected);
+  };
+  const offset = Pagination * itemsPerPage;
   const currentPageData = filteredCrypto.slice(offset, offset + itemsPerPage);
   const pageCount = Math.ceil(filteredCrypto.length / itemsPerPage);
 
+  ///////////////////////
+
+  //////////////// DELETE //////////////////////////////////////////////////
+  const removeFromSidebar = (id) => {
+    setSidebarItems((prevItems) => {
+      const newItems = prevItems.filter((item) => item.id !== id);
+      localStorage.setItem("sidebarItems", JSON.stringify(newItems));
+      return newItems;
+    });
+  };
+  /////////////////////////
   return (
     <div>
       <header>
@@ -93,7 +115,12 @@ const Home = () => {
                     <div>
                       <img className="side-img" src={item.image} alt="" />
                       <h3 className="side-h">₹ {item.current_price}</h3>
-                      <button className="side-but">Remove</button>
+                      <button
+                        onClick={() => removeFromSidebar(item.id)}
+                        className="side-but"
+                      >
+                        Remove
+                      </button>
                     </div>
                   </div>
                 ))}
@@ -191,7 +218,16 @@ const Home = () => {
                   <td>
                     <p className="tabPPPP">
                       <TbEyePlus
-                        style={{ cursor: "pointer", width: 26, height: 24 }}
+                        style={{
+                          cursor: "pointer",
+                          width: 26,
+                          height: 24,
+                          color: sidebarItems.some(
+                            (sidebarItem) => sidebarItem.id === crypto.id
+                          )
+                            ? "green"
+                            : "white",
+                        }}
                         onClick={() => addToSidebar(crypto)}
                       />
                       <Link className="link" to={`/details/${crypto.id}`}>
@@ -204,7 +240,7 @@ const Home = () => {
             </tbody>
           </table>
           <ReactPaginate
-            previousLabel={<button>Previous</button>}
+            previousLabel={<button>Back</button>}
             nextLabel={<button>Next</button>}
             breakLabel={<span>...</span>}
             breakClassName={"break-me"}
