@@ -9,6 +9,7 @@ import "react-multi-carousel/lib/styles.css";
 import { ImExit } from "react-icons/im";
 import { TbEyePlus } from "react-icons/tb";
 import ReactPaginate from "react-paginate";
+import confirm from "antd/es/modal/confirm";
 
 const Home = () => {
   const responsive = {
@@ -34,6 +35,8 @@ const Home = () => {
     };
     fetchData();
   }, []);
+  //////////////
+
   ///////////////////////// SIDEBAR //////////////////////////////////
   const [isOpen, setIsOpen] = useState(false);
   const [sidebarItems, setSidebarItems] = useState(
@@ -116,7 +119,11 @@ const Home = () => {
                       <img className="side-img" src={item.image} alt="" />
                       <h3 className="side-h">₹ {item.current_price}</h3>
                       <button
-                        onClick={() => removeFromSidebar(item.id)}
+                        onClick={() =>
+                          confirm("are you sure")
+                            ? removeFromSidebar(item.id)
+                            : ""
+                        }
                         className="side-but"
                       >
                         Remove

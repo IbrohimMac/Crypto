@@ -2,7 +2,7 @@ body {
   background-color: #14161a;
   .detaAdmin {
     display: flex;
-    margin-top: 50px;
+    margin-top: 20px;
     .detaBig {
       width: 540px;
       height: 787px;
@@ -37,4 +37,44 @@ body {
       }
     }
   }
+}
+.deta-but {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.detaB1 {
+  width: 240px;
+  height: 41px;
+  // padding: 11px 187.19px 11px 21px;
+  gap: 0px;
+  border-radius: 5px;
+  border: 1px 0px 0px 0px;
+  opacity: 0px;
+  background-color: #87ceeb;
+  color: black;
+  border: 1px solid #87ceeb;
+  margin-left: 20px;
+}
+.detaB2 {
+  width: 240px;
+  height: 41px;
+  // padding: 11px 187.19px 11px 21px;
+  border-radius: 5px;
+  border: 1px 0px 0px 0px;
+  background-color: black;
+  color: white;
+  border: 1px solid #87ceeb;
+}
+.detaB1:hover {
+  background-color: black;
+  transition: 0.3s;
+  color: white;
+}
+.detaB2:hover {
+  background-color: #87ceeb;
+  transition: 0.3s;
+  color: black;
 }

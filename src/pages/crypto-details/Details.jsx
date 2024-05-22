@@ -111,6 +111,12 @@ const Details = () => {
         </div>
         <div className="apex">
           <Apex dates={chartData} />
+          <div className="deta-but">
+            <button className="detaB1">24 Hours</button>
+            <button className="detaB2">30 Days</button>
+            <button className="detaB2">3 Months</button>
+            <button className="detaB2">1 Year</button>
+          </div>
         </div>
       </div>
     </>
