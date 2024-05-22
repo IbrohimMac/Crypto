@@ -99,14 +99,16 @@ header {
 //   cursor: pointer;
 // }
 .App {
-  padding-left: 20px;
+  // padding-left: 20px;
   position: fixed;
   z-index: 1100;
-  display: flex;
 }
 #app {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  // flex-direction: column;
   // min-height: 100vh;
 }
 .sidebar {
@@ -129,6 +131,7 @@ header {
   border: none;
   font-size: 30px;
   margin-left: 20px;
+  display: flex;
 }
 .sidebar.open {
   right: 0;
@@ -160,20 +163,20 @@ header {
   background-color: #575757;
 }
 .head-side {
-  width: 170px;
+  width: 200px;
   height: 200px;
   gap: 0px;
   border-radius: 25px;
   opacity: 0px;
   background-color: #14161a;
   padding-top: 17px;
-  // padding-left: 40px;
-  margin-top: 20px;
+  margin-top: 60px;
+  // margin-left: -100px;
   .side-img {
     width: 60px;
     height: 58px;
     margin-bottom: 30px;
-    margin-left: 50px;
+    margin-left: 70px;
   }
   .side-but {
     width: 60px;
@@ -183,10 +186,10 @@ header {
     cursor: pointer;
     border: none;
     margin-bottom: 15px;
-    margin-left: 50px;
+    margin-left: 70px;
   }
   .side-h {
-    margin-left: 25px;
+    margin-left: 40px;
     margin-bottom: 15px;
   }
   .side-but:hover {

@@ -107,7 +107,7 @@ const Home = () => {
               <div id="app" className={`sidebar ${isOpen ? "open" : ""}`}>
                 <button className="head-exit" onClick={toggleSidebar}>
                   {isOpen ? "" : "WATCHLIST"}
-                  <ImExit />
+                  <ImExit style={{ marginTop: 5 }} />
                 </button>
                 <h2>WATCHLIST</h2>
                 {sidebarItems.map((item, index) => (

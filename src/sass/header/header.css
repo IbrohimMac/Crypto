@@ -78,15 +78,15 @@ header .head-big .head-end button:hover {
 }
 
 .App {
-  padding-left: 20px;
   position: fixed;
   z-index: 1100;
-  display: flex;
 }
 
 #app {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
 }
 
 .sidebar {
@@ -110,6 +110,7 @@ header .head-big .head-end button:hover {
   border: none;
   font-size: 30px;
   margin-left: 20px;
+  display: flex;
 }
 
 .sidebar.open {
@@ -143,20 +144,20 @@ header .head-big .head-end button:hover {
 }
 
 .head-side {
-  width: 170px;
+  width: 200px;
   height: 200px;
   gap: 0px;
   border-radius: 25px;
   opacity: 0px;
   background-color: #14161a;
   padding-top: 17px;
-  margin-top: 20px;
+  margin-top: 60px;
 }
 .head-side .side-img {
   width: 60px;
   height: 58px;
   margin-bottom: 30px;
-  margin-left: 50px;
+  margin-left: 70px;
 }
 .head-side .side-but {
   width: 60px;
@@ -166,10 +167,10 @@ header .head-big .head-end button:hover {
   cursor: pointer;
   border: none;
   margin-bottom: 15px;
-  margin-left: 50px;
+  margin-left: 70px;
 }
 .head-side .side-h {
-  margin-left: 25px;
+  margin-left: 40px;
   margin-bottom: 15px;
 }
 .head-side .side-but:hover {
